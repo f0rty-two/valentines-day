@@ -9,7 +9,7 @@
     <button class="close-button" @click="closeDialog">&times;</button>
 
     <template v-if="dialogStep === 'ask'">
-      <div style="color: white">Anja, will you be my valentine?</div>
+      <div style="color: white">Clara, will you be my valentine?</div>
       <div class="dialog-buttons">
         <button class="fall-button" @click="answerYes">Yes</button>
         <button class="fall-button" @click="answerNo">No</button>
@@ -26,6 +26,7 @@
 
     <template v-if="dialogStep === 'party'">
       <div style="color: white">yeeeeeeeeaaaah!</div>
+      <div style="color: white; margin-top: 10px;">Love you &lt;3</div>
     </template>
   </dialog>
 </template>
@@ -39,7 +40,7 @@ import flower3 from '@/assets/images/flower_3.png'
 import flower4 from '@/assets/images/flower_4.png'
 import flower5 from '@/assets/images/flower_5.png'
 import flower6 from '@/assets/images/flower_6.png'
-import partyMusic from '@/assets/music/partyonwebbi.wav'
+import partyMusic from '@/assets/music/Conga.mp3'
 
 const images = [flower1, flower2, flower3, flower4, flower5, flower6]
 const audio = new Audio(partyMusic)
@@ -215,7 +216,7 @@ const gridStyle = computed(() => ({
   transition: background-color 5s ease;
 
   &.party-mode {
-    animation: strobe 0.3s infinite;
+    animation: strobe 2s infinite;
   }
 
   &.falling {
@@ -224,9 +225,14 @@ const gridStyle = computed(() => ({
 }
 
 @keyframes strobe {
-  0% { background-color: black; }
-  50% { background-color: white; }
-  100% { background-color: black; }
+  0% { background-color: #ff0000; }
+  14% { background-color: #ffa500; }
+  28% { background-color: #ffff00; }
+  42% { background-color: #008000; }
+  57% { background-color: #0000ff; }
+  71% { background-color: #4b0082; }
+  85% { background-color: #ee82ee; }
+  100% { background-color: #ff0000; }
 }
 
 @keyframes pulse {
