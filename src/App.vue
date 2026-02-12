@@ -6,7 +6,7 @@
   </div>
 
   <dialog ref="dialogRef" class="flower-dialog" @cancel.prevent>
-    <button class="close-button" @click="closeDialog">&times;</button>
+    <button v-if="dialogStep !== 'party'" class="close-button" @click="closeDialog">&times;</button>
 
     <template v-if="dialogStep === 'ask'">
       <div style="color: white">Clara, will you be my valentine?</div>
