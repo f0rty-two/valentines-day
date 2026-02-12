@@ -6,7 +6,7 @@
   </div>
 
   <dialog ref="dialogRef" class="flower-dialog" @cancel.prevent>
-    <button v-if="dialogStep !== 'party'" class="close-button" @click="closeDialog">&times;</button>
+    <button class="close-button" @click="closeDialog">&times;</button>
 
     <template v-if="dialogStep === 'ask'">
       <div style="color: white">Clara, will you be my valentine?</div>
@@ -27,6 +27,13 @@
     <template v-if="dialogStep === 'party'">
       <div style="color: white">yeeeeeeeeaaaah!</div>
       <div style="color: white; margin-top: 10px;">Love you &lt;3</div>
+    </template>
+
+    <template v-if="dialogStep === 'cantStop'">
+      <div style="color: white">this party wont be stopped</div>
+      <div class="dialog-buttons">
+        <button class="fall-button" @click="closeCantStop">OK</button>
+      </div>
     </template>
   </dialog>
 </template>
@@ -99,14 +106,27 @@ function onCellClick(i: number) {
   }
 }
 
-const dialogStep = ref<'ask' | 'sure' | 'party'>('ask')
+const dialogStep = ref<'ask' | 'sure' | 'party' | 'cantStop'>('ask')
+
+const partyStopAttempted = ref(false)
 
 function closeDialog() {
+  if (partyMode.value && !partyStopAttempted.value) {
+    partyStopAttempted.value = true
+    dialogStep.value = 'cantStop'
+    return
+  }
+  
   dialogRef.value?.close()
   dialogStep.value = 'ask'
+  partyStopAttempted.value = false
   if (partyMode.value) {
     stopParty()
   }
+}
+
+function closeCantStop() {
+  dialogStep.value = 'party'
 }
 
 const rising = ref(false)
